@@ -3,6 +3,7 @@ package com.example.moodtracker;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private ImageView noteAdd;
     private ImageView history;
 
+    int i = 0;
 
 
     @Override
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gestureDetector = new GestureDetector(this,this);
+        gestureDetector = new GestureDetector(this, this);
 
 
         backgraoundMoods = findViewById(R.id.background_moods);
@@ -66,13 +68,33 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Log.d(MainActivity.class.getSimpleName(), "OnFling : " + velocityY);
 
-        if (velocityY < 0){
-            int i =0;
+
+        if (velocityY < 0 && i >= 0 && i < 4) {
+
+            i++;
+
             backgraoundMoods.setBackgroundResource(Mood.values()[i].getColorRes());
+            faceMoods.setImageResource(Mood.values()[i].getDrawableRes());
+
+
+            return true;
 
         }
 
-        return false;
+
+        if (velocityY > 0 && i >= 1 && i <= 4) {
+
+            i--;
+            backgraoundMoods.setBackgroundResource(Mood.values()[i].getColorRes());
+            faceMoods.setImageResource(Mood.values()[i].getDrawableRes());
+
+
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
