@@ -30,4 +30,10 @@ public enum Mood {
         this.drawableRes = drawableRes;
 
     }
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
