@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private ImageView faceMoods;
     private ImageView noteAdd;
     private ImageView history;
+
 
     int i = 0;
 
@@ -33,6 +35,16 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         noteAdd = findViewById(R.id.note_add);
         history = findViewById(R.id.history);
 
+
+
+
+    }
+
+
+
+    public void userComments(View v){
+
+        DialogComments.showCommentsDiags(this);
 
     }
 
