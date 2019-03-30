@@ -8,6 +8,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
@@ -34,15 +38,19 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         faceMoods = findViewById(R.id.face_moods);
         noteAdd = findViewById(R.id.note_add);
         history = findViewById(R.id.history);
+        Realm.getDefaultInstance().beginTransaction();
+        DailyMood todayMood =  Realm.getDefaultInstance().createObject(DailyMood.class);
+        todayMood.setComment("test");
+        todayMood.saveMood(Mood.HAPPY);
+        Realm.getDefaultInstance().commitTransaction();
 
-
-
+        RealmResults<DailyMood> results = Realm.getDefaultInstance().where(DailyMood.class).findAll();
+        Toast.makeText(this,results.get(0).getComment(),Toast.LENGTH_LONG).show();
 
     }
 
 
-
-    public void userComments(View v){
+    public void userComments(View v) {
 
         DialogComments.showCommentsDiags(this);
 
@@ -82,31 +90,25 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         Log.d(MainActivity.class.getSimpleName(), "OnFling : " + velocityY);
 
+        boolean shouldConsumeEvent = false;
 
-        if (velocityY < 0 && i >= 0 && i < 4) {
-
+        if (velocityY < 0 ) {
+            shouldConsumeEvent = true;
             i++;
 
-            backgraoundMoods.setBackgroundResource(Mood.values()[i].getColorRes());
-            faceMoods.setImageResource(Mood.values()[i].getDrawableRes());
-
-
-            return true;
-
-        }
-
-
-        if (velocityY > 0 && i >= 1 && i <= 4) {
-
+        }else if ( velocityY > 0 ) {
+            shouldConsumeEvent = true;
             i--;
-            backgraoundMoods.setBackgroundResource(Mood.values()[i].getColorRes());
-            faceMoods.setImageResource(Mood.values()[i].getDrawableRes());
 
-
-            return true;
-        } else {
-            return false;
         }
+
+
+
+        backgraoundMoods.setBackgroundResource(Mood.values()[i].getColorRes());
+        faceMoods.setImageResource(Mood.values()[i].getDrawableRes());
+
+        return shouldConsumeEvent;
+
 
     }
 }
