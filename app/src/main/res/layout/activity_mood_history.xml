@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoodHistory">
+
+    <TextView
+        android:id="@+id/history_text_view_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/seven_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        tools:background="@color/banana_yellow" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:id="@+id/history_img_comment1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_1"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_1"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_1" />
+
+    <TextView
+        android:id="@+id/history_text_view_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/six_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_1"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        tools:visibility="visible"
+        android:id="@+id/history_img_comment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_2"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_2"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_2"
+
+        />
+
+    <TextView
+        android:id="@+id/history_text_view_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/five_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_2"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        android:id="@+id/history_img_comment3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_3"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_3"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_3" />
+
+    <TextView
+        android:id="@+id/history_text_view_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/four_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_3"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        android:id="@+id/history_img_comment4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_4"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_4"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_4" />
+
+    <TextView
+        android:id="@+id/history_text_view_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/tree_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_4"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        android:id="@+id/history_img_comment5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_5"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_5"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_5" />
+
+    <TextView
+        android:id="@+id/history_text_view_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/two_days_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_5"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        android:id="@+id/history_img_comment6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_6"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_6"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_6" />
+
+    <TextView
+        android:id="@+id/history_text_view_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/one_day_ago"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_text_view_6"
+        app:layout_constraintWidth_percent="0.6"
+        tools:background="@color/light_sage" />
+
+    <ImageView
+        android:id="@+id/history_img_comment7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/history_text_view_7"
+        app:layout_constraintEnd_toEndOf="@id/history_text_view_7"
+        app:layout_constraintTop_toTopOf="@id/history_text_view_7" />
+
+
+</android.support.constraint.ConstraintLayout>
