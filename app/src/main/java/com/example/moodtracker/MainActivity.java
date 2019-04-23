@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         dailyMood.setComment("test1");
         dailyMood.setDate(LocalDate.now().toString());
         dailyMood.saveMood(Mood.HAPPY);
-        DailyMood todayMood = Realm.getDefaultInstance().createObject(DailyMood.class, dailyMood);
+        Realm.getDefaultInstance().copyToRealmOrUpdate(dailyMood);
         Realm.getDefaultInstance().commitTransaction();
 
 
