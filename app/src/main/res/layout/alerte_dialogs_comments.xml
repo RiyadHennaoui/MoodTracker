@@ -8,45 +8,42 @@
         android:id="@+id/alert_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Commentaire"
-        />
+        android:text="Commentaire" />
 
     <EditText
-
         android:id="@+id/ET_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/alert_dialog_title"/>
+        android:layout_below="@+id/alert_dialog_title"
+        android:hint="@string/dialog_comment_hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ET_comments"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn_cancel"
-            android:text="ANNULER"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/colorAccent"
-            android:background="#FFF"/>
+            android:background="#FFF"
+            android:text="ANNULER"
+            android:textColor="@color/colorAccent" />
 
         <Button
             android:id="@+id/btn_validate"
-            android:text="VALIDER"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/colorAccent"
             android:background="#FFF"
+            android:text="VALIDER"
+            android:textColor="@color/colorAccent"
 
             />
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

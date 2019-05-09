@@ -2,26 +2,27 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background_moods"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/banana_yellow"
-    android:id="@+id/background_moods"
+    tools:background="@color/banana_yellow"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/face_moods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/smiley_super_happy"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        tools:background="@drawable/smiley_super_happy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/note_add"
@@ -32,8 +33,26 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_note_add_black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="userComments"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/sms_share"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:background="@drawable/baseline_textsms_black_48"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/history"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/note_add" />-->
+
+    <Button
+        android:id="@+id/sms_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/history"
+        app:layout_constraintStart_toEndOf="@+id/note_add" />
 
 
     <ImageView
@@ -45,7 +64,6 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_history_black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

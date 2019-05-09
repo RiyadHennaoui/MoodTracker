@@ -7,4 +7,6 @@
     <string name="tree_days_ago">Il a trois jours</string>
     <string name="two_days_ago">Avant-hier</string>
     <string name="one_day_ago">Hier</string>
+    <string name="share">Share</string>
+    <string name="dialog_comment_hint">tapez votre commentaire ici</string>
 </resources>

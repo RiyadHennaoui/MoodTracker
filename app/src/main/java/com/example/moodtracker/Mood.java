@@ -5,7 +5,7 @@ import android.support.annotation.DrawableRes;
 
 public enum Mood {
 
-    SUPER_HAPPY(R.color.banana_yellow, R.drawable.smiley_super_happy, 1f),
+    SUPER_HAPPY(R.color.banana_yellow, R.drawable.smiley_super_happy, 0.99f),
     HAPPY(R.color.light_sage, R.drawable.smiley_happy, 0.8f),
     NORMAL(R.color.cornflower_blue_65, R.drawable.smiley_normal, 0.6f),
     SAD(R.color.warm_grey, R.drawable.smiley_sad, 0.4f),
