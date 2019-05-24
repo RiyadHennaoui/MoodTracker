@@ -9,4 +9,18 @@
     <string name="one_day_ago">Hier</string>
     <string name="share">Share</string>
     <string name="dialog_comment_hint">tapez votre commentaire ici</string>
+    <string name="button_to_add_comment">Button to add comment</string>
+    <string name="button_to_go_in_history_screen">Button to go in history screen</string>
+    <string name="button_to_share_with_sms">button to share with sms</string>
+    <string name="comment_of_yesterday">Comment of yesterday</string>
+    <string name="comment_two_days_ago">Comment two days ago</string>
+    <string name="comment_three_days_ago">Comment three days ago</string>
+    <string name="comment_four_days_ago">Comment four days ago</string>
+    <string name="comment_five_days_ago">Comment five days ago</string>
+    <string name="comment_six_days_ago">Comment six days ago</string>
+    <string name="comment_seven_days_ago">Comment seven days ago</string>
+    <string name="comment">Commentaire</string>
+    <string name="cancel">ANNULER</string>
+    <string name="validate">VALIDER</string>
+    <string name="sms_body">Bonjour, aujourd\'hui je me sens %s. %s</string>
 </resources>

@@ -19,7 +19,6 @@
         tools:background="@color/banana_yellow" />
 
     <ImageView
-        tools:visibility="visible"
         android:id="@+id/history_img_comment1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +27,9 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/history_text_view_1"
         app:layout_constraintEnd_toEndOf="@id/history_text_view_1"
-        app:layout_constraintTop_toTopOf="@id/history_text_view_1" />
+        app:layout_constraintTop_toTopOf="@id/history_text_view_1"
+        android:contentDescription="@string/comment_seven_days_ago"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/history_text_view_2"
@@ -42,16 +43,17 @@
         tools:background="@color/light_sage" />
 
     <ImageView
-        tools:visibility="visible"
         android:id="@+id/history_img_comment2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_six_days_ago"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/history_text_view_2"
         app:layout_constraintEnd_toEndOf="@id/history_text_view_2"
         app:layout_constraintTop_toTopOf="@id/history_text_view_2"
+        tools:visibility="visible"
 
         />
 
@@ -70,6 +72,7 @@
         android:id="@+id/history_img_comment3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_five_days_ago"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"
@@ -92,6 +95,7 @@
         android:id="@+id/history_img_comment4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_four_days_ago"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"
@@ -114,6 +118,7 @@
         android:id="@+id/history_img_comment5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_three_days_ago"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"
@@ -136,6 +141,7 @@
         android:id="@+id/history_img_comment6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_two_days_ago"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"
@@ -158,6 +164,7 @@
         android:id="@+id/history_img_comment7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/comment_of_yesterday"
         android:padding="16dp"
         android:src="@drawable/ic_comment_black_48px"
         android:visibility="gone"

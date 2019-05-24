@@ -6,7 +6,7 @@ import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
+
 
 public class DailyMood extends RealmObject {
 
@@ -16,19 +16,19 @@ public class DailyMood extends RealmObject {
     private long date;
 
 
-    public String getComment() {
+    String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
+    void setComment(String comment) {
         this.comment = comment;
     }
 
-    public Mood getMood() {
+    Mood getMood() {
         return mood == null ? null : Mood.valueOf(mood);
     }
 
-    public void saveMood(Mood mood) {
+    void saveMood(Mood mood) {
         this.mood = mood.name();
     }
 
@@ -36,18 +36,17 @@ public class DailyMood extends RealmObject {
 //        return date;
 //    }
 
-    public void setDate(LocalDate date) {
+    void setDate(LocalDate date) {
         this.date = DateUtils.getTodaysDateAsLong(date);
     }
 
-    public RealmResults<DailyMood> saveAllMood (){
-
-        RealmResults<DailyMood> results = Realm.getDefaultInstance()
-                .where(DailyMood.class)
-                .equalTo("date", DateUtils.getTodaysDateAsLong(LocalDate.now()))
-                .findAll();
-
-        return results;
+    @Override
+    public String toString() {
+        return "DailyMood{" +
+                "comment='" + comment + '\'' +
+                ", mood='" + mood + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
 

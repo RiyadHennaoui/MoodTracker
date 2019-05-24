@@ -22,7 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        />
 
     <ImageView
         android:id="@+id/note_add"
@@ -33,22 +34,15 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_note_add_black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!--<ImageView-->
-    <!--android:id="@+id/sms_share"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="12dp"-->
-    <!--android:background="@drawable/baseline_textsms_black_48"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toStartOf="@+id/history"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/note_add" />-->
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/button_to_add_comment" />
 
     <Button
         android:id="@+id/sms_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/button_to_share_with_sms"
         android:text="@string/share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/history"
@@ -64,6 +58,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_history_black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/button_to_go_in_history_screen"/>
 
 </android.support.constraint.ConstraintLayout>

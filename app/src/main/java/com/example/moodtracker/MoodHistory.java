@@ -1,38 +1,19 @@
 package com.example.moodtracker;
 
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.List;
 
-import org.threeten.bp.LocalDate;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class MoodHistory extends AppCompatActivity {
 
     private ConstraintLayout constraintLayout;
-    private TextView txtView1;
-    private TextView txtView2;
-    private TextView txtView3;
-    private TextView txtView4;
-    private TextView txtView5;
-    private TextView txtView6;
-    private TextView txtView7;
-
-    private ImageView img1;
-    private ImageView img2;
-    private ImageView img3;
-    private ImageView img4;
-    private ImageView img5;
-    private ImageView img6;
-    private ImageView img7;
 
 
     @Override
@@ -41,28 +22,23 @@ public class MoodHistory extends AppCompatActivity {
         setContentView(R.layout.activity_mood_history);
 
         constraintLayout = findViewById(R.id.main_layout);
-        txtView1 = findViewById(R.id.history_text_view_1);
-        txtView2 = findViewById(R.id.history_text_view_2);
-        txtView3 = findViewById(R.id.history_text_view_3);
-        txtView4 = findViewById(R.id.history_text_view_4);
-        txtView5 = findViewById(R.id.history_text_view_5);
-        txtView6 = findViewById(R.id.history_text_view_6);
-        txtView7 = findViewById(R.id.history_text_view_7);
+        TextView txtView1 = findViewById(R.id.history_text_view_1);
+        TextView txtView2 = findViewById(R.id.history_text_view_2);
+        TextView txtView3 = findViewById(R.id.history_text_view_3);
+        TextView txtView4 = findViewById(R.id.history_text_view_4);
+        TextView txtView5 = findViewById(R.id.history_text_view_5);
+        TextView txtView6 = findViewById(R.id.history_text_view_6);
+        TextView txtView7 = findViewById(R.id.history_text_view_7);
 
-        img1 = findViewById(R.id.history_img_comment1);
-        img2 = findViewById(R.id.history_img_comment2);
-        img3 = findViewById(R.id.history_img_comment3);
-        img4 = findViewById(R.id.history_img_comment4);
-        img5 = findViewById(R.id.history_img_comment5);
-        img6 = findViewById(R.id.history_img_comment6);
-        img7 = findViewById(R.id.history_img_comment7);
+        ImageView img1 = findViewById(R.id.history_img_comment1);
+        ImageView img2 = findViewById(R.id.history_img_comment2);
+        ImageView img3 = findViewById(R.id.history_img_comment3);
+        ImageView img4 = findViewById(R.id.history_img_comment4);
+        ImageView img5 = findViewById(R.id.history_img_comment5);
+        ImageView img6 = findViewById(R.id.history_img_comment6);
+        ImageView img7 = findViewById(R.id.history_img_comment7);
 
-        RealmResults<DailyMood> results = Realm.getDefaultInstance()
-                .where(DailyMood.class)
-                .sort("date", Sort.DESCENDING)
-                .limit(7)
-                .lessThan("date", DateUtils.getTodaysDateAsLong(LocalDate.now()))
-                .findAll();
+        List<DailyMood> results = new MoodDao().getLastSevenDailyMoods();
 
         switch (results.size()) {
 
@@ -114,7 +90,7 @@ public class MoodHistory extends AppCompatActivity {
         } else {
 
             btnComment.setVisibility(View.VISIBLE);
-            // ajouter un listner sur le comment.
+
             btnComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

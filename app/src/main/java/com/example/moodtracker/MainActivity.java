@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -17,56 +18,44 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.threeten.bp.LocalDate;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
+import static com.example.moodtracker.Mood.HAPPY;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+
+    private static final Mood DEFAULT_MOOD = HAPPY;
 
     private GestureDetector gestureDetector;
 
     private ConstraintLayout backgraoundMoods;
-    private ImageView faceMoods;
-    private ImageView noteAdd;
-    private ImageView history;
-    private Button smsShare;
-    private DailyMood dailyMood;
-    private Mood defaultMood;
-    private Mood consumableMood;
-    private DailyMood dailyMoodInstance;
 
+    private ImageView faceMoods;
+
+
+    private Mood consumableMood;
+    private MoodDao mMoodDao;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mMoodDao = new MoodDao();
         gestureDetector = new GestureDetector(this, this);
 
 
         backgraoundMoods = findViewById(R.id.background_moods);
         faceMoods = findViewById(R.id.face_moods);
-        noteAdd = findViewById(R.id.note_add);
-        history = findViewById(R.id.history);
-        smsShare = findViewById(R.id.sms_share);
-
-        defaultMood = Mood.HAPPY;
-
-        dailyMoodInstance = new DailyMood();
-
-        RealmResults<DailyMood> results = dailyMoodInstance.saveAllMood();
+        ImageView noteAdd = findViewById(R.id.note_add);
+        ImageView history = findViewById(R.id.history);
+        Button smsShare = findViewById(R.id.sms_share);
 
 
+        DailyMood results = mMoodDao.getTodaysMood();
 
-        if (results.isEmpty()) {
 
-            persistMood(defaultMood, true);
+        if (results == null) {
 
-        } else {
-
-            dailyMood = results.get(0);
+            mMoodDao.persistMood(DEFAULT_MOOD);
 
         }
 
@@ -85,55 +74,38 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         noteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creatAndDisplayDialog();
+                createAndDisplayDialog();
             }
         });
 
         smsShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] test = {"toto@gmail.com"};
-                composeEmail(test, "salut");// a changer.
+                composeSmsMessage();
             }
         });
 
 
     }
 
-    private void persistMood(Mood mood, boolean create) {
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        Realm.getDefaultInstance().beginTransaction();
-        if (create) {
+        DailyMood results = mMoodDao.getTodaysMood();
 
-            dailyMood = new DailyMood();
-            dailyMood.setDate(LocalDate.now());
-            dailyMood.saveMood(mood);
-            Realm.getDefaultInstance().copyToRealmOrUpdate(dailyMood);
 
-        } else {
-            dailyMood.saveMood(mood);
-        }
+        if (results == null) {
 
-        Realm.getDefaultInstance().commitTransaction();
+            mMoodDao.persistMood(DEFAULT_MOOD);
 
-    }
-
-    private void updateMood(Mood mood) {
-
-        persistMood(mood, false);
-    }
-
-    public void composeEmail(String[] addresses, String subject) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
         }
     }
 
-    public void composeSmsMessage(String message) {
+    private void composeSmsMessage() {
+        DailyMood dailyMood = mMoodDao.getTodaysMood();
+        //noinspection ConstantConditions it is impossible not to have a comment here.
+        String message = getString(R.string.sms_body, dailyMood.getMood().name(), dailyMood.getComment());
         Uri uri = Uri.parse("smsto:");
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.putExtra("sms_body", message);
@@ -176,13 +148,11 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
 
+        boolean shouldConsumeEvent = checkConsumableMood(velocityY);
         displayCurrentMood();
 
-
-        boolean shouldConsumeEvent = checkConsumableMood(velocityY);
-
         if (shouldConsumeEvent) {
-            updateMood(consumableMood);
+            mMoodDao.persistMood(consumableMood);
         }
 
         return shouldConsumeEvent;
@@ -192,18 +162,24 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     private boolean checkConsumableMood(float velocityY) {
 
-        int i = dailyMood.getMood().ordinal();
+        //noinspection ConstantConditions it is impossible not to have a comment here.
+        int i = mMoodDao.getTodaysMood().getMood().ordinal();
 
         boolean shouldConsumeEvent = false;
 
         if (velocityY < 0) {
-            shouldConsumeEvent = true;
             i++;
+            shouldConsumeEvent = true;
+            Log.d("Wis", "i = " + i);
+            Log.d("Wis", "velo =" + velocityY);
+//            Log.d("Wis", "mood.values = " + Mood.values()[i]);
 
         } else if (velocityY > 0) {
-            shouldConsumeEvent = true;
             i--;
-
+            shouldConsumeEvent = true;
+            Log.d("Wis", "i = " + i);
+            Log.d("Wis", "velo =" + velocityY);
+//            Log.d("Wis", "mood.values = " + Mood.values()[i]);
         }
         if (i < 0) {
 
@@ -212,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         } else if (i > Mood.values().length - 1) {
 
             i = Mood.values().length - 1;
+            Log.d("Wis", "i = " + i);
 
         }
         consumableMood = Mood.values()[i];
@@ -221,22 +198,26 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
 
     private void displayCurrentMood() {
+        DailyMood dailyMood = mMoodDao.getTodaysMood();
+        Log.d("Wis", "dailymood" + dailyMood);
+        //noinspection ConstantConditions it is impossible not to have a comment here.
         backgraoundMoods.setBackgroundResource(dailyMood.getMood().getColorRes());
         faceMoods.setImageResource(dailyMood.getMood().getDrawableRes());
     }
 
     // Build a dialog for save comment of user.
-    private void creatAndDisplayDialog() {
+    private void createAndDisplayDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LinearLayout layout = new LinearLayout(this);
         TextView message = new TextView(this);
         final EditText inputComment = new EditText(this);
 
-        message.setText("Commentaire");
+        message.setText(R.string.comment);
         message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
         inputComment.setSingleLine();
-        inputComment.setText(dailyMood.getComment());
+        //noinspection ConstantConditions it is impossible not to have a comment here.
+        inputComment.setText(mMoodDao.getTodaysMood().getComment());
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.addView(message);
         layout.addView(inputComment);
@@ -244,16 +225,15 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         builder.setView(layout);
 
-        builder.setNegativeButton("ANNULER", null);
+        builder.setNegativeButton(R.string.cancel, null);
 
-        builder.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.validate, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
 
-                Realm.getDefaultInstance().beginTransaction();
-                dailyMood.setComment(inputComment.getText().toString());
-                Realm.getDefaultInstance().commitTransaction();
+                mMoodDao.persistComment(inputComment.getText().toString());
+
             }
         });
 
