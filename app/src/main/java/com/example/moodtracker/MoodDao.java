@@ -12,6 +12,7 @@ import io.realm.Sort;
 
 public class MoodDao {
 
+//  Management of Database
     @Nullable
     DailyMood getTodaysMood() {
         RealmResults<DailyMood> realmResults = Realm.getDefaultInstance()

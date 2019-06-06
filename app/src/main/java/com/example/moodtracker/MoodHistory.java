@@ -75,6 +75,7 @@ public class MoodHistory extends AppCompatActivity {
 
     }
 
+//  layout management dynamically
     private void bindView(TextView txtview, ImageView btnComment, final DailyMood mood) {
         txtview.setBackgroundResource(mood.getMood().getColorRes());
 

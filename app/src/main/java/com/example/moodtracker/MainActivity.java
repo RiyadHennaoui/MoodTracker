@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private ImageView faceMoods;
 
 
-    private Mood consumableMood;
     private MoodDao mMoodDao;
 
 
@@ -105,7 +104,11 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private void composeSmsMessage() {
         DailyMood dailyMood = mMoodDao.getTodaysMood();
         //noinspection ConstantConditions it is impossible not to have a comment here.
-        String message = getString(R.string.sms_body, dailyMood.getMood().name(), dailyMood.getComment());
+        String message = getString(
+                R.string.sms_body,
+                dailyMood.getMood().name(),
+                dailyMood.getComment() == null ? "" : dailyMood.getComment()
+        );
         Uri uri = Uri.parse("smsto:");
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.putExtra("sms_body", message);
@@ -148,38 +151,33 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
 
-        boolean shouldConsumeEvent = checkConsumableMood(velocityY);
+        boolean shouldConsumeEvent = updateMood(velocityY);
         displayCurrentMood();
 
-        if (shouldConsumeEvent) {
-            mMoodDao.persistMood(consumableMood);
-        }
 
         return shouldConsumeEvent;
 
 
     }
 
-    private boolean checkConsumableMood(float velocityY) {
+    private boolean updateMood(float velocityY) {
 
         //noinspection ConstantConditions it is impossible not to have a comment here.
         int i = mMoodDao.getTodaysMood().getMood().ordinal();
-
+        Log.d("Wis", "i = " + i);
+        Log.d("Wis", "velo =" + velocityY);
         boolean shouldConsumeEvent = false;
 
         if (velocityY < 0) {
             i++;
             shouldConsumeEvent = true;
-            Log.d("Wis", "i = " + i);
-            Log.d("Wis", "velo =" + velocityY);
-//            Log.d("Wis", "mood.values = " + Mood.values()[i]);
+
 
         } else if (velocityY > 0) {
             i--;
             shouldConsumeEvent = true;
-            Log.d("Wis", "i = " + i);
-            Log.d("Wis", "velo =" + velocityY);
-//            Log.d("Wis", "mood.values = " + Mood.values()[i]);
+
+
         }
         if (i < 0) {
 
@@ -188,10 +186,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         } else if (i > Mood.values().length - 1) {
 
             i = Mood.values().length - 1;
-            Log.d("Wis", "i = " + i);
 
         }
-        consumableMood = Mood.values()[i];
+        mMoodDao.persistMood(Mood.values()[i]);
 
         return shouldConsumeEvent;
     }

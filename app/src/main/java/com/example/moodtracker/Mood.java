@@ -5,6 +5,8 @@ import android.support.annotation.DrawableRes;
 
 public enum Mood {
 
+
+//  set color, image and occupancy percentage of the layout history
     SUPER_HAPPY(R.color.banana_yellow, R.drawable.smiley_super_happy, 0.99f),
     HAPPY(R.color.light_sage, R.drawable.smiley_happy, 0.8f),
     NORMAL(R.color.cornflower_blue_65, R.drawable.smiley_normal, 0.6f),

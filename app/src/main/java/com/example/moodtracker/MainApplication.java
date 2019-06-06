@@ -7,7 +7,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import io.realm.Realm;
 
 public class MainApplication extends Application {
-
+//  initialize Real and Android Three Ten
     @Override
     public void onCreate() {
         super.onCreate();
